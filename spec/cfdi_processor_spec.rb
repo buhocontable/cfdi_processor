@@ -3,7 +3,7 @@ RSpec.describe CfdiProcessor do
     expect(CfdiProcessor::VERSION).not_to be nil
   end
 
-  it "does something useful" do
-    expect(false).to eq(true)
+  it "" do
+    expect(CfdiProcessor::StampedExtractor.new(xml_string)).to be_kind_of CfdiProcessor::StampedExtractor
   end
 end

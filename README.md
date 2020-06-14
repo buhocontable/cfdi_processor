@@ -1,8 +1,8 @@
 # CfdiProcessor
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/cfdi_processor`. To experiment with that code, run `bin/console` for an interactive prompt.
+Extracts the information from the CFDI (Mexico) and converts it into a hash.
 
-TODO: Delete this and the text above, and describe your gem
+[![Build Status](https://travis-ci.com/armando1339/cfdi_processor.svg?branch=master)](https://travis-ci.com/armando1339/cfdi_processor) [![Coverage Status](https://coveralls.io/repos/github/armando1339/cfdi_processor/badge.svg?branch=master)](https://coveralls.io/github/armando1339/cfdi_processor?branch=master)
 
 ## Installation
 
@@ -22,17 +22,50 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### CFDI Data
 
-## Development
+Create an instance of `CfdiProcessor::StampedExtractor` and pass to it the params.
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+```ruby
+xml_data = CfdiProcessor::StampedExtractor.new(xml_string)
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+Access to the data extracted
+
+```ruby
+
+# => Execute the instance methods
+xml_data.receipt
+xml_data.issuer
+xml_data.receiver
+xml_data.concepts
+xml_data.taxes
+
+```
+
+To access to the XML string and Nokogiri document.
+
+```ruby
+
+# =>
+xml_data.xml
+
+# =>
+xml_data.nokogiri_xml
+
+```
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/cfdi_processor.
+Bug report or pull request are welcome. Make a pull request:
+
+- Clone the repo
+- Create a new feature branch
+- Commit your changes
+- Push the new branch
+- Create new pull-request
+
+Please write tests if necessary.
 
 ## License
 
