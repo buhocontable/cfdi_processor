@@ -1,4 +1,5 @@
-require "nokogiri"
+require 'nokogiri'
+require 'i18n'
 
 module CfdiProcessor
   class DataExtractorBase
@@ -54,10 +55,3 @@ module CfdiProcessor
     end
   end
 end
-
-
-
-
-
-
-

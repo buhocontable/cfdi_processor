@@ -2,7 +2,7 @@
 
 Extracts the information from the CFDI (Mexico) and converts it into a hash.
 
-[![Build Status](https://travis-ci.com/armando1339/cfdi_processor.svg?branch=master)](https://travis-ci.com/armando1339/cfdi_processor) [![Coverage Status](https://coveralls.io/repos/github/armando1339/cfdi_processor/badge.svg?branch=master)](https://coveralls.io/github/armando1339/cfdi_processor?branch=master)
+[![Build Status](https://travis-ci.com/armando1339/cfdi_processor.svg?branch=master)](https://travis-ci.com/armando1339/cfdi_processor) [![Coverage Status](https://coveralls.io/repos/github/armando1339/cfdi_processor/badge.svg?branch=master)](https://coveralls.io/github/armando1339/cfdi_processor?branch=master) [![Gem Version](https://badge.fury.io/rb/cfdi_processor.svg)](https://badge.fury.io/rb/cfdi_processor)
 
 ## Installation
 
