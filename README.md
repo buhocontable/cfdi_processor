@@ -22,15 +22,15 @@ Or install it yourself as:
 
 ## Usage
 
-### CFDI Data
+### Extract CFDI Data
 
-Create an instance of `CfdiProcessor::StampedExtractor` and pass to it the params.
+Create an instance of `CfdiProcessor::StampedExtractor` and pass to it a xml string.
 
 ```ruby
 xml_data = CfdiProcessor::StampedExtractor.new(xml_string)
 ```
 
-Access to the data extracted
+To access to the data extracted.
 
 ```ruby
 
