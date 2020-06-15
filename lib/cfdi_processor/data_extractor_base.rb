@@ -1,5 +1,4 @@
 require 'nokogiri'
-require_relative "i18n"
 
 module CfdiProcessor
   class DataExtractorBase
@@ -9,6 +8,8 @@ module CfdiProcessor
       @xml = xml
       @nokogiri_xml = ::Nokogiri::XML(xml)
       @nokogiri_xml.remove_namespaces!
+      I18n.load_path << File.expand_path("locale/en.yml", __dir__)
+      I18n.locale = :en
 
       # => Hook methods:
       #
@@ -39,12 +40,12 @@ module CfdiProcessor
           if value.kind_of?(Array)
             next if value.empty?
             items = value.each do |item|
-              item.transform_keys!{ |k| ::I18n.t("#{args.first}.#{key}.#{k}") }
+              item.transform_keys!{ |k| I18n.t("#{args.first}.#{key}.#{k}") }
             end
 
-            translated.merge!(::I18n.t("#{args.first}.#{resource_name}.#{key}") => items)
+            translated.merge!(I18n.t("#{args.first}.#{resource_name}.#{key}") => items)
           else
-            translated.merge!(::I18n.t("#{args.first}.#{resource_name}.#{key}") => value)
+            translated.merge!(I18n.t("#{args.first}.#{resource_name}.#{key}") => value)
           end
 
           instance_variable_set("@#{resource_name}", translated)         
