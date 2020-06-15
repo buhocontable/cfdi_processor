@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cfdi_processor (1.0.0)
+    cfdi_processor (1.0.1)
 
 GEM
   remote: https://rubygems.org/
