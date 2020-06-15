@@ -55,10 +55,3 @@ module CfdiProcessor
     end
   end
 end
-
-
-
-
-
-
-
