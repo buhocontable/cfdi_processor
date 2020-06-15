@@ -1,0 +1,96 @@
+en:
+  cfdi:
+    receipt:
+      Version: version
+      Serie: serie
+      Folio: folio_ui
+      Fecha: date_issued
+      Sello: stamp
+      FormaPago: payment_form
+      NoCertificado: certificate_number
+      Certificado: certificate
+      CondicionesDePago: payment_conditions
+      SubTotal: subtotal
+      Descuento: discount
+      Moneda: currency
+      TipoCambio: exchange_rate
+      Total: total
+      TipoDeComprobante: invoice_type
+      MetodoPago: payment_method
+      LugarExpedicion: expedition_place
+      Confirmacion: confirmation
+    issuer:
+      Rfc: rfc
+      Nombre: legal_name
+      RegimenFiscal: fiscal_regime
+    receiver:
+      Rfc: rfc
+      Nombre: legal_name
+      ResidenciaFiscal: tax_residency
+      NumRegIdTrib: tax_identity_registration_number
+      UsoCFDI: cfdi_use
+    concepts:
+      ClaveProdServ: sat_product_id
+      NoIdentificacion: identification_number
+      Cantidad: quantity
+      ClaveUnidad: unit
+      Unidad: unit_measure
+      Descripcion: description
+      ValorUnitario: unit_value
+      Importe: price
+      Descuento: discount
+      Traslados: transferred
+      Retenidos: detained
+    taxes:
+      TotalImpuestosTrasladados: total_taxes_transferred
+      TotalImpuestosRetenidos: total_taxes_detained
+      Traslados: transferred
+      Retenidos: detained
+    Traslados:
+      Base: base
+      Impuesto: tax
+      TipoFactor: factor_type
+      TasaOCuota: rate_or_fee
+      Importe: import
+    Retenidos:
+      Base: base
+      Impuesto: tax
+      TipoFactor: factor_type
+      TasaOCuota: rate_or_fee
+      Importe: import
+
+    # cfdi_related:
+    #   TipoRelacion: relationship_type
+    # related:
+    #   UUID: uuid
+    
+    # tax_transferred:
+      
+    # tax_detained:
+    #   Base: base
+    #   Impuesto: tax
+    #   TipoFactor: factor_type
+    #   TasaOCuota: rate_or_fee
+    #   Importe: import
+    # customs_information: # InformacionAduanera
+    #   NumeroPedimento: requirement_number
+    # property_account: # CuentaPredial
+    #   Numero: number
+    # part: # Parte
+    #   ClaveProdServ: prod_or_svc_key
+    #   NoIdentificacion: identification_number
+    #   Cantidad: quantity
+    #   Unidad: unit_measure
+    #   Descripcion: description
+    #   ValorUnitario: unit_value
+    #   Importe: amount
+    
+    # detained:
+      
+    # transferred:
+      
+    # cancellation:
+    #   Fecha: date
+    #   RfcEmisor: rfc
+    # uuid:
+    #   UUID: folio_fiscal

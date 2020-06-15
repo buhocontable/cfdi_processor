@@ -1,6 +1,4 @@
 require "cfdi_processor/version"
-
-module CfdiProcessor
-  class Error < StandardError; end
-  # Your code goes here...
-end
+require "cfdi_processor/i18n"
+require "cfdi_processor/data_extractor_base"
+require "cfdi_processor/stamped_extractor"

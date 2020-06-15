@@ -1,5 +1,11 @@
+require 'coveralls'
+Coveralls.wear!
+
 require "bundler/setup"
 require "cfdi_processor"
+require "shoulda-matchers"
+require "pry"
+require "support/xml_helper"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
@@ -10,5 +16,13 @@ RSpec.configure do |config|
 
   config.expect_with :rspec do |c|
     c.syntax = :expect
+  end
+
+  config.include XmlHelper
+end
+
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
   end
 end
