@@ -35,5 +35,13 @@ RSpec.describe CfdiProcessor::StampedExtractor do
     it "is expected that return CfdiProcessor::StampedExtractor" do
       expect(subject.translate_data).to be_kind_of CfdiProcessor::StampedExtractor
     end
+
+    before do
+      subject.translate_data
+    end
+
+    it "is expected that return @receipt translated" do
+      expect(subject.receipt.include?('date_issued')).to be_truthy
+    end
   end
 end 
