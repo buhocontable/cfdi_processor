@@ -37,18 +37,20 @@ module CfdiProcessor
     end
 
     def concepts_data_from_xml
-      nokogiri_xml.at('Conceptos').element_children.map do |e|
-        @concepts = e.to_h
+      @concepts = nokogiri_xml.at('Conceptos').element_children.map do |e|
+        concepts = e.to_h
         concepts["Traslados"]   = (e.at('Impuestos').css("Traslado").map{|e| e.to_h})
         concepts["Retenciones"] = (e.at('Impuestos').css("Retencion").map{|e| e.to_h})
-      end 
+        concepts
+      end
     end
 
     def taxes_data_from_xml
-      nokogiri_xml.css('Comprobante Impuestos').last.element_children.map do |e|
-        @taxes = nokogiri_xml.css('Comprobante Impuestos').last.to_h
+      @taxes = nokogiri_xml.css('Comprobante Impuestos').last.element_children.map do |e|
+        taxes = nokogiri_xml.css('Comprobante Impuestos').last.to_h
         taxes["Traslados"]   = (e.css("Traslado").map{|e| e.to_h})
         taxes["Retenciones"] = (e.css("Retencion").map{|e| e.to_h})
+        taxes
       end
     end
   end
