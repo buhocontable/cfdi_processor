@@ -35,24 +35,39 @@ module CfdiProcessor
     def method_missing(name, *args, &block)
       if name.to_s.start_with?('_translate_')
         resource_name = name.to_s.sub('_translate_', '')
-
-        instance_variable_get("@#{resource_name}").inject({}) do |translated, (key,value)|
-          if value.kind_of?(Array)
-            next if value.empty?
-            items = value.each do |item|
-              item.transform_keys!{ |k| I18n.t("#{args.first}.#{key}.#{k}") }
-            end
-
-            translated.merge!(I18n.t("#{args.first}.#{resource_name}.#{key}") => items)
-          else
-            translated.merge!(I18n.t("#{args.first}.#{resource_name}.#{key}") => value)
+        instance_var  = instance_variable_get("@#{resource_name}")
+        if  instance_var.kind_of?(Array)
+          translated = instance_var.map do |object|
+            translate_instance_variable(resource_name,object,args)
           end
-
-          instance_variable_set("@#{resource_name}", translated)         
+        else
+          translated = translate_instance_variable(resource_name,instance_var,args)
         end
+
+        instance_variable_set("@#{resource_name}", translated)  
       else 
         super
       end
+    end
+
+    private
+
+    def translate_instance_variable(resource_name,object,args)
+      item = {}
+      object.inject({}) do |translated, (key,value)|
+        if value.kind_of?(Array)
+          next if value.empty?
+          items = value.each do |item|
+            item.transform_keys!{ |k| I18n.t("#{args.first}.#{key}.#{k}") }
+          end
+
+          translated.merge!(I18n.t("#{args.first}.#{resource_name}.#{key}") => items)
+        else
+          translated.merge!(I18n.t("#{args.first}.#{resource_name}.#{key}") => value)
+        end
+        item = translated       
+      end
+      item 
     end
   end
 end
