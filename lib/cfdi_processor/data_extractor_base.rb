@@ -38,10 +38,11 @@ module CfdiProcessor
         instance_var  = instance_variable_get("@#{resource_name}")
         if  instance_var.kind_of?(Array)
           translated = instance_var.map do |object|
+            next if object.blank?
             translate_instance_variable(resource_name,object,args)
           end
-        else
-          translated = translate_instance_variable(resource_name,instance_var,args)
+        else 
+          translated = translate_instance_variable(resource_name,instance_var,args) unless instance_var.blank?
         end
 
         instance_variable_set("@#{resource_name}", translated)  
@@ -52,11 +53,11 @@ module CfdiProcessor
 
     private
 
-    def translate_instance_variable(resource_name,object,args)
+    def translate_instance_variable(resource_name,object,args) 
       item = {}
       object.inject({}) do |translated, (key,value)|
         if value.kind_of?(Array)
-          next if value.empty?
+          next if value.blank?
           items = value.each do |item|
             item.transform_keys!{ |k| I18n.t("#{args.first}.#{key}.#{k}") }
           end
