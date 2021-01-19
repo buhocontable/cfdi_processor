@@ -2,9 +2,11 @@ en:
   cfdi:
     receipt:
       Version: version
+      version: version
       Serie: serie
       Folio: folio_ui
       Fecha: date_issued
+      fecha: date_issued
       Sello: stamp
       FormaPago: payment_form
       NoCertificado: certificate_number
@@ -19,16 +21,33 @@ en:
       MetodoPago: payment_method
       LugarExpedicion: expedition_place
       Confirmacion: confirmation
+      subTotal: subtotal
+      descuento: discount
+      moneda: currency
+      tipoCambio: exchange_rate
+      total: total
+      tipoDeComprobante: invoice_type
+      metodoPago: payment_method
+      lugarExpedicion: expedition_place
+      confirmacion: confirmation
     issuer:
       Rfc: rfc
+      rfc: rfc
       Nombre: legal_name
+      nombre: legal_name
       RegimenFiscal: fiscal_regime
+      regimenFiscal: fiscal_regime
     receiver:
       Rfc: rfc
+      rfc: rfc
       Nombre: legal_name
+      nombre: legal_name
       ResidenciaFiscal: tax_residency
+      residenciaFiscal: tax_residency
       NumRegIdTrib: tax_identity_registration_number
+      numRegIdTrib: tax_identity_registration_number
       UsoCFDI: cfdi_use
+      usoCFDI: cfdi_use
     concepts:
       ClaveProdServ: sat_product_id
       NoIdentificacion: identification_number
@@ -41,6 +60,17 @@ en:
       Descuento: discount
       Traslados: transferred
       Retenidos: detained
+      claveProdServ: sat_product_id
+      noIdentificacion: identification_number
+      cantidad: quantity
+      claveUnidad: unit
+      unidad: unit_measure
+      descripcion: description
+      valorUnitario: unit_value
+      importe: price
+      descuento: discount
+      traslados: transferred
+      retenidos: detained
     taxes:
       TotalImpuestosTrasladados: total_taxes_transferred
       TotalImpuestosRetenidos: total_taxes_detained
@@ -52,12 +82,44 @@ en:
       TipoFactor: factor_type
       TasaOCuota: rate_or_fee
       Importe: import
+      base: base
+      impuesto: tax
+      tipoFactor: factor_type
+      tasaOCuota: rate_or_fee
+      importe: import
     Retenidos:
       Base: base
       Impuesto: tax
       TipoFactor: factor_type
       TasaOCuota: rate_or_fee
       Importe: import
+      base: base
+      impuesto: tax
+      tipoFactor: factor_type
+      tasaOCuota: rate_or_fee
+      importe: import
+    complement:
+      RfcProvCertif: rfc_prov
+      Version: version
+      UUID: folio_fiscal
+      FechaTimbrado: stamp_date
+      SelloCFD: seal_cfd
+      selloCFD: seal_cfd
+      NoCertificadoSAT: certificate_number_sat
+      noCertificadoSAT: certificate_number_sat
+      SelloSAT: seal_sat
+      selloSAT: seal_sat
+    payments:
+      FechaPago: payment_date
+      MonedaP: currency
+      Monto: total
+      NumOperacion: operation_number
+    DoctoRelacionado:
+      IdDocumento: uuid
+      MonedaDR: currency
+      FormaDePagoP: payment_form
+
+
 
     # cfdi_related:
     #   TipoRelacion: relationship_type
