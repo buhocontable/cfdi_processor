@@ -118,6 +118,9 @@ en:
       IdDocumento: uuid
       MonedaDR: currency
       FormaDePagoP: payment_form
+    local_taxes:
+      TotaldeRetenciones: total_taxes_detained
+      TotaldeTraslados: total_taxes_transferred
 
 
 
