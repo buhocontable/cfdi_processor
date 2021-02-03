@@ -1,6 +1,6 @@
 module CfdiProcessor
   class StampedExtractor < CfdiProcessor::DataExtractorBase
-    attr_accessor :receipt, :issuer, :receiver, :concepts, :taxes, :complement, :payments, :payroll
+    attr_accessor :receipt, :issuer, :receiver, :concepts, :taxes, :complement, :payments, :payroll, :local_taxes
 
     def extract_data_from_xml
       receipt_data_from_xml
@@ -11,6 +11,7 @@ module CfdiProcessor
       complement_data_from_xml
       payment_data_from_xml
       payroll_data_from_xml
+      local_taxes_data_from_xml
 
       self
     end
@@ -23,6 +24,7 @@ module CfdiProcessor
       _translate_taxes(:cfdi)
       _translate_complement(:cfdi)
       _translate_payments(:cfdi)
+      _translate_local_taxes(:cfdi)
       _translate_payroll_data_from_xml(:cfdi)
 
       self
@@ -92,6 +94,10 @@ module CfdiProcessor
         end
         @payroll = payroll_attribute
       end
+    end
+
+    def local_taxes_data_from_xml 
+      @local_taxes = nokogiri_xml.at('ImpuestosLocales').to_h
     end
   end
 end
