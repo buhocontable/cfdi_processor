@@ -59,7 +59,7 @@ en:
       Importe: price
       Descuento: discount
       Traslados: transferred
-      Retenidos: detained
+      Retenciones: detained
       claveProdServ: sat_product_id
       noIdentificacion: identification_number
       cantidad: quantity
@@ -70,12 +70,12 @@ en:
       importe: price
       descuento: discount
       traslados: transferred
-      retenidos: detained
+      retenciones: detained
     taxes:
       TotalImpuestosTrasladados: total_taxes_transferred
       TotalImpuestosRetenidos: total_taxes_detained
       Traslados: transferred
-      Retenidos: detained
+      Retenciones: detained
     Traslados:
       Base: base
       Impuesto: tax
@@ -87,7 +87,7 @@ en:
       tipoFactor: factor_type
       tasaOCuota: rate_or_fee
       importe: import
-    Retenidos:
+    Retenciones:
       Base: base
       Impuesto: tax
       TipoFactor: factor_type
