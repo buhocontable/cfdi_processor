@@ -114,6 +114,8 @@ en:
       MonedaP: currency
       Monto: total
       NumOperacion: operation_number
+      TipoCambioP: exchange_rate
+      FormaDePagoP: payment_form
     DoctoRelacionado:
       IdDocumento: uuid
       MonedaDR: currency
