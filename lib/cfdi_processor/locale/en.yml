@@ -116,6 +116,7 @@ en:
       NumOperacion: operation_number
       TipoCambioP: exchange_rate
       FormaDePagoP: payment_form
+      DoctoRelacionado: related_doc
     DoctoRelacionado:
       IdDocumento: uuid
       MonedaDR: currency

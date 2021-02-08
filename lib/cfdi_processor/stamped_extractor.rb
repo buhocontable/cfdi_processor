@@ -68,7 +68,11 @@ module CfdiProcessor
 
     def payment_data_from_xml 
       return [] if nokogiri_xml.css('Pago').blank?
-      @payments = nokogiri_xml.at('Pago').to_h
+      @payments = nokogiri_xml.at('Pagos').element_children.map do |e|
+        payments = e.to_h
+        payments["DoctoRelacionado"] = e.at('DoctoRelacionado').to_h
+        payments
+      end
     end
 
     def payroll_data_from_xml
