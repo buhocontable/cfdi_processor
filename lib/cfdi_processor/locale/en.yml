@@ -116,14 +116,22 @@ en:
       NumOperacion: operation_number
       TipoCambioP: exchange_rate
       FormaDePagoP: payment_form
-      DoctoRelacionado: related_doc
+      DoctoRelacionado: related_docs
     DoctoRelacionado:
       IdDocumento: uuid
       MonedaDR: currency
       FormaDePagoP: payment_form
+      MetodoDePagoDR: payment_method
+      NumParcialidad: partiality_number
+      ImpSaldoAnt: previous_balance_amount
+      ImpPagado: amount_paid
+      ImpSaldoInsoluto: unpaid_balance_amount
+      Serie: serie
+      Folio: folio
     local_taxes:
       TotaldeRetenciones: total_taxes_detained
       TotaldeTraslados: total_taxes_transferred
+      ImpSaldoInsoluto: 
 
 
 

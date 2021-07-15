@@ -70,7 +70,9 @@ module CfdiProcessor
       return [] if nokogiri_xml.css('Pago').blank?
       @payments = nokogiri_xml.at('Pagos').element_children.map do |e|
         payments = e.to_h
-        payments["DoctoRelacionado"] = e.at('DoctoRelacionado').to_h
+        payments["DoctoRelacionado"] = e.css('DoctoRelacionado').map do |doc|
+          doc.to_h
+        end
         payments
       end
     end
