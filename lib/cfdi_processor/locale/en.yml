@@ -30,6 +30,7 @@ en:
       metodoPago: payment_method
       lugarExpedicion: expedition_place
       confirmacion: confirmation
+      c_Exportacion: export_code
     issuer:
       Rfc: rfc
       rfc: rfc
@@ -48,6 +49,7 @@ en:
       numRegIdTrib: tax_identity_registration_number
       UsoCFDI: cfdi_use
       usoCFDI: cfdi_use
+      DomicilioFiscalReceptor: zip_code
     concepts:
       ClaveProdServ: sat_product_id
       NoIdentificacion: identification_number
@@ -71,6 +73,7 @@ en:
       descuento: discount
       traslados: transferred
       retenciones: detained
+      ObjetoImp: taxable_code
     taxes:
       TotalImpuestosTrasladados: total_taxes_transferred
       TotalImpuestosRetenidos: total_taxes_detained
