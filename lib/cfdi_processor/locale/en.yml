@@ -30,6 +30,7 @@ en:
       metodoPago: payment_method
       lugarExpedicion: expedition_place
       confirmacion: confirmation
+      Exportacion: export_code
     issuer:
       Rfc: rfc
       rfc: rfc
@@ -48,7 +49,10 @@ en:
       numRegIdTrib: tax_identity_registration_number
       UsoCFDI: cfdi_use
       usoCFDI: cfdi_use
+      DomicilioFiscalReceptor: zip_code
+      RegimenFiscalReceptor: fiscal_regime
     concepts:
+      ObjetoImp: taxable_code
       ClaveProdServ: sat_product_id
       NoIdentificacion: identification_number
       Cantidad: quantity
