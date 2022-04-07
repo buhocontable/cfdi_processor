@@ -30,7 +30,7 @@ en:
       metodoPago: payment_method
       lugarExpedicion: expedition_place
       confirmacion: confirmation
-      c_Exportacion: export_code
+      Exportacion: export_code
     issuer:
       Rfc: rfc
       rfc: rfc
