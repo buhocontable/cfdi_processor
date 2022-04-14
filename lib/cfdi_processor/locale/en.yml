@@ -132,6 +132,19 @@ en:
       ImpSaldoInsoluto: unpaid_balance_amount
       Serie: serie
       Folio: folio
+      ObjetoImp: taxable_code
+    TrasladosDR:
+      BaseDR: base
+      ImpuestoDR: tax
+      TipoFactorDR: factor_type
+      TasaOCuotaDR: rate_or_fee
+      ImporteDR: import
+    TrasladosP:
+      BaseP: base
+      ImpuestoP: tax
+      TipoFactorP: factor_type
+      TasaOCuotaP: rate_or_fee
+      ImporteP: import
     local_taxes:
       TotaldeRetenciones: total_taxes_detained
       TotaldeTraslados: total_taxes_transferred
