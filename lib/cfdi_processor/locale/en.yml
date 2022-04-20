@@ -132,7 +132,10 @@ en:
       ImpSaldoInsoluto: unpaid_balance_amount
       Serie: serie
       Folio: folio
-      ObjetoImp: taxable_code
+      ObjetoImpDR: taxable_code
+      ImpuestosDR: taxes
+    ImpuestosDR:
+      TrasladosDR: transferred
     TrasladosDR:
       BaseDR: base
       ImpuestoDR: tax
