@@ -136,13 +136,13 @@ en:
       ImpuestosDR: taxes
     ImpuestosDR:
       TrasladoDR: transferred
-    TrasladosDR:
+    TrasladoDR:
       BaseDR: base
       ImpuestoDR: tax
       TipoFactorDR: factor_type
       TasaOCuotaDR: rate_or_fee
       ImporteDR: import
-    TrasladosP:
+    TrasladoP:
       BaseP: base
       ImpuestoP: tax
       TipoFactorP: factor_type
