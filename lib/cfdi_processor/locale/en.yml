@@ -134,9 +134,10 @@ en:
       Folio: folio
       ObjetoImpDR: taxable_code
       ImpuestosDR: taxes
+      EquivalenciaDR: equivalence
     ImpuestosDR:
       TrasladoDR: transferred
-    TrasladoDR:
+    transferred: # TrasladoDR
       BaseDR: base
       ImpuestoDR: tax
       TipoFactorDR: factor_type
