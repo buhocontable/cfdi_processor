@@ -135,7 +135,7 @@ en:
       ObjetoImpDR: taxable_code
       ImpuestosDR: taxes
     ImpuestosDR:
-      TrasladosDR: transferred
+      TrasladoDR: transferred
     TrasladosDR:
       BaseDR: base
       ImpuestoDR: tax
