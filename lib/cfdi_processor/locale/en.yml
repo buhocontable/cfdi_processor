@@ -136,8 +136,8 @@ en:
       ImpuestosDR: taxes
       EquivalenciaDR: equivalence
     ImpuestosDR:
-      TrasladoDR: transferred
-    transferred: # TrasladoDR
+      TrasladosDR: transferred
+    TrasladosDR: 
       BaseDR: base
       ImpuestoDR: tax
       TipoFactorDR: factor_type

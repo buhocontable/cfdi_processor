@@ -75,7 +75,7 @@ module CfdiProcessor
           if doc_hash["ObjetoImpDR"] == "02"
             transferred_taxes = doc.css('TrasladoDR')
             doc_hash["ImpuestosDR"] = {}
-            doc_hash["ImpuestosDR"]["TrasladoDR"] = transferred_taxes.map do |transferred|
+            doc_hash["ImpuestosDR"]["TrasladosDR"] = transferred_taxes.map do |transferred|
               transferred.to_h
             end
           end
