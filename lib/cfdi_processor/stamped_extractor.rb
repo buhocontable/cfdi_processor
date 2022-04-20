@@ -68,15 +68,17 @@ module CfdiProcessor
 
     def payment_data_from_xml 
       return [] if nokogiri_xml.css('Pago').blank?
-      @payments = @nokogiri_xml.at('Pagos').element_children.map do |e|
+      @payments = @nokogiri_xml.at('Pagos').css('Pago').map do |e|
         payments = e.to_h
         payments["DoctoRelacionado"] = e.css('DoctoRelacionado').map do |doc|
           doc_hash = doc.to_h
           if doc_hash["ObjetoImpDR"] == "02"
             transferred_taxes = doc.css('TrasladoDR')
-            doc_hash["ImpuestosDR"] = {}
-            doc_hash["ImpuestosDR"]["TrasladosDR"] = transferred_taxes.map do |transferred|
-              transferred.to_h
+            doc_hash["ImpuestosDR"] = []
+            doc_hash["ImpuestosDR"] = transferred_taxes.map do |transferred|
+              aux_h = transferred.to_h
+              aux_h['tax_type_aux'] = "transferred"
+              aux_h
             end
           end
           doc_hash
