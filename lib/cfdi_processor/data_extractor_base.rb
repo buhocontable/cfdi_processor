@@ -31,6 +31,7 @@ module CfdiProcessor
         translated = translate(key, value)
         instance_variable_set("@#{key}", translated)
       end
+      self
     end
 
     def translate(translation_key, object)
