@@ -38,7 +38,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "nokogiri", "~> 1.6", ">= 1.6.8"
   spec.add_development_dependency "i18n", "~> 1.8", ">= 1.8.3"
-  spec.add_development_dependency "bundler", "~> 2.1.4"
+  spec.add_development_dependency "bundler", "~> 2.2.4"
   spec.add_development_dependency "rake", ">= 12.3.3"
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "shoulda-matchers", "~> 4.3"
