@@ -143,6 +143,12 @@ en:
       TipoFactorDR: factor_type
       TasaOCuotaDR: rate_or_fee
       ImporteDR: import
+    RetencionesDR: 
+      BaseDR: base
+      ImpuestoDR: tax
+      TipoFactorDR: factor_type
+      TasaOCuotaDR: rate_or_fee
+      ImporteDR: import
     TrasladoP:
       BaseP: base
       ImpuestoP: tax
