@@ -137,6 +137,7 @@ en:
       EquivalenciaDR: equivalence
     ImpuestosDR:
       TrasladosDR: transferred
+      RetencionesDR: retained
     TrasladosDR: 
       BaseDR: base
       ImpuestoDR: tax
