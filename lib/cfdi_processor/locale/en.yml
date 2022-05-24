@@ -137,7 +137,14 @@ en:
       EquivalenciaDR: equivalence
     ImpuestosDR:
       TrasladosDR: transferred
+      RetencionesDR: retained
     TrasladosDR: 
+      BaseDR: base
+      ImpuestoDR: tax
+      TipoFactorDR: factor_type
+      TasaOCuotaDR: rate_or_fee
+      ImporteDR: import
+    RetencionesDR: 
       BaseDR: base
       ImpuestoDR: tax
       TipoFactorDR: factor_type

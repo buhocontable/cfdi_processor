@@ -66,10 +66,10 @@ module CfdiProcessor
           doc_hash = doc.to_h
           if doc_hash["ObjetoImpDR"] == "02"
             transferred_taxes = doc.css('TrasladoDR')
+            retained_taxes = doc.css('RetencionDR')
             doc_hash["ImpuestosDR"] = {}
-            doc_hash["ImpuestosDR"]['TrasladosDR'] = transferred_taxes.map do |transferred|
-              transferred.to_h
-            end
+            doc_hash["ImpuestosDR"]['TrasladosDR'] = transferred_taxes.map { |transferred| transferred.to_h } 
+            doc_hash["ImpuestosDR"]['RetencionesDR'] = retained_taxes.map { |retained| retained.to_h } 
           end
           doc_hash
         end
