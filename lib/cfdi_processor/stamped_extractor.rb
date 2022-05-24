@@ -16,32 +16,21 @@ module CfdiProcessor
       self
     end
 
-    def translate_data
-      _translate_receipt(:cfdi)
-      _translate_issuer(:cfdi)
-      _translate_receiver(:cfdi)
-      _translate_concepts(:cfdi)
-      _translate_taxes(:cfdi)
-      _translate_complement(:cfdi)
-      _translate_payments(:cfdi)
-      _translate_local_taxes(:cfdi)
-      _translate_payroll_data_from_xml(:cfdi)
-
-      self
-    end
-
     private
 
     def receipt_data_from_xml
       @receipt = nokogiri_xml.at('Comprobante').to_h
+      @base_hash['receipt'] = @receipt
     end
 
     def issuer_data_from_xml
       @issuer = nokogiri_xml.at('Emisor').to_h
+      @base_hash['issuer'] = @issuer
     end
 
     def receiver_data_from_xml
       @receiver = nokogiri_xml.at('Receptor').to_h
+      @base_hash['receiver'] = @receiver
     end
 
     def concepts_data_from_xml
@@ -51,6 +40,7 @@ module CfdiProcessor
         concepts["Retenciones"] = (e.at('Impuestos').css("Retencion").map{|e| e.to_h}) if e.at('Impuestos')
         concepts
       end
+      @base_hash['concepts'] = @concepts
     end
 
     def taxes_data_from_xml
@@ -60,21 +50,32 @@ module CfdiProcessor
       taxes["Traslados"]   = (base_node.css("Traslado").map{|e| e.to_h})
       taxes["Retenciones"] = (base_node.css("Retencion").map{|e| e.to_h})
       @taxes = taxes   
+      @base_hash['taxes'] = @taxes
     end
 
     def complement_data_from_xml
       @complement = nokogiri_xml.at('TimbreFiscalDigital').to_h
+      @base_hash['complement'] = @complement
     end
 
     def payment_data_from_xml 
       return [] if nokogiri_xml.css('Pago').blank?
-      @payments = nokogiri_xml.at('Pagos').element_children.map do |e|
+      @payments = @nokogiri_xml.at('Pagos').css('Pago').map do |e|
         payments = e.to_h
         payments["DoctoRelacionado"] = e.css('DoctoRelacionado').map do |doc|
-          doc.to_h
+          doc_hash = doc.to_h
+          if doc_hash["ObjetoImpDR"] == "02"
+            transferred_taxes = doc.css('TrasladoDR')
+            doc_hash["ImpuestosDR"] = {}
+            doc_hash["ImpuestosDR"]['TrasladosDR'] = transferred_taxes.map do |transferred|
+              transferred.to_h
+            end
+          end
+          doc_hash
         end
         payments
       end
+      @base_hash['payments'] = @payments
     end
 
     def payroll_data_from_xml
@@ -99,11 +100,15 @@ module CfdiProcessor
           payroll_attribute["OtrosPagos"]["items"] = (payroll_other_payments.css("OtroPago").map{|e| e.to_h})
         end
         @payroll = payroll_attribute
+        @base_hash['payroll'] = @payroll
       end
     end
 
     def local_taxes_data_from_xml 
-      @local_taxes = nokogiri_xml.at('ImpuestosLocales').to_h
+      if nokogiri_xml.at('ImpuestosLocales')
+        @local_taxes = nokogiri_xml.at('ImpuestosLocales').to_h
+        @base_hash['local_taxes'] = @local_taxes
+      end
     end
   end
 end

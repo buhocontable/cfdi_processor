@@ -30,6 +30,7 @@ en:
       metodoPago: payment_method
       lugarExpedicion: expedition_place
       confirmacion: confirmation
+      Exportacion: export_code
     issuer:
       Rfc: rfc
       rfc: rfc
@@ -48,7 +49,10 @@ en:
       numRegIdTrib: tax_identity_registration_number
       UsoCFDI: cfdi_use
       usoCFDI: cfdi_use
+      DomicilioFiscalReceptor: zip_code
+      RegimenFiscalReceptor: fiscal_regime
     concepts:
+      ObjetoImp: taxable_code
       ClaveProdServ: sat_product_id
       NoIdentificacion: identification_number
       Cantidad: quantity
@@ -128,6 +132,23 @@ en:
       ImpSaldoInsoluto: unpaid_balance_amount
       Serie: serie
       Folio: folio
+      ObjetoImpDR: taxable_code
+      ImpuestosDR: taxes
+      EquivalenciaDR: equivalence
+    ImpuestosDR:
+      TrasladosDR: transferred
+    TrasladosDR: 
+      BaseDR: base
+      ImpuestoDR: tax
+      TipoFactorDR: factor_type
+      TasaOCuotaDR: rate_or_fee
+      ImporteDR: import
+    TrasladoP:
+      BaseP: base
+      ImpuestoP: tax
+      TipoFactorP: factor_type
+      TasaOCuotaP: rate_or_fee
+      ImporteP: import
     local_taxes:
       TotaldeRetenciones: total_taxes_detained
       TotaldeTraslados: total_taxes_transferred

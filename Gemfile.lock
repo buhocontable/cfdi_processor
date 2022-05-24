@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cfdi_processor (1.0.10)
+    cfdi_processor (1.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -69,7 +69,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 2.1.4)
+  bundler (~> 2.2.4)
   cfdi_processor!
   coveralls
   i18n (~> 1.8, >= 1.8.3)
@@ -80,4 +80,4 @@ DEPENDENCIES
   shoulda-matchers (~> 4.3)
 
 BUNDLED WITH
-   2.1.4
+   2.2.4

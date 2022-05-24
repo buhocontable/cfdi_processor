@@ -5,6 +5,7 @@ module CfdiProcessor
     attr_accessor :xml, :nokogiri_xml
 
     def initialize(xml)
+      @base_hash = {}
       @xml = xml
       @nokogiri_xml = ::Nokogiri::XML(xml)
       @nokogiri_xml.remove_namespaces!
@@ -25,50 +26,30 @@ module CfdiProcessor
     end
 
     def translate_data
-      raise 'Undefined abstract method: #translate_data'
-    end
-
-    # => Search for the _translate_ pattern at the beginning of the method,
-    # if it is found, look for the translation based on the end of the
-    # method name and the argument that is passed to it.
-    #
-    def method_missing(name, *args, &block)
-      if name.to_s.start_with?('_translate_')
-        resource_name = name.to_s.sub('_translate_', '')
-        instance_var  = instance_variable_get("@#{resource_name}")
-        if  instance_var.kind_of?(Array)
-          translated = instance_var.map do |object|
-            translate_instance_variable(resource_name,object,args)
-          end
-        else  
-          translated = translate_instance_variable(resource_name,instance_var,args) unless instance_var.blank?
-        end
-
-        instance_variable_set("@#{resource_name}", translated)  
-      else 
-        super
+      @base_hash.keys.each do |key|
+        value = @base_hash[key]
+        translated = translate(key, value)
+        instance_variable_set("@#{key}", translated)
       end
+      self
     end
 
-    private
+    def translate(translation_key, object)
+      return object.map{|obj| translate(translation_key, obj) } if object.is_a? Array
 
-    def translate_instance_variable(resource_name,object,args) 
-      item = {}
-      object.inject({}) do |translated, (key,value)|
-        if value.kind_of?(Array) 
-          next if value.blank?
-          translated = item  if translated.blank?
-          items = value.each do |item|
-            item.transform_keys!{ |k| I18n.t("#{args.first}.#{key}.#{k}") }
+      translated = {}
+      if object.is_a? Hash
+        object.keys.each do |key|
+          val = object[key]
+          if val.is_a?(Array) || val.is_a?(Hash)
+            val = translate(key, val)
           end
-
-          translated.merge!(I18n.t("#{args.first}.#{resource_name}.#{key}") => items)
-        else
-          translated.merge!(I18n.t("#{args.first}.#{resource_name}.#{key}") => value)
+          translation = I18n.t("cfdi.#{translation_key}.#{key}")
+          translated.merge!(translation => val)
         end
-        item = translated       
       end
-      item 
+      translated
     end
+
   end
 end
