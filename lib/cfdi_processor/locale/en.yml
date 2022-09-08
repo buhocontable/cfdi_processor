@@ -159,7 +159,49 @@ en:
     local_taxes:
       TotaldeRetenciones: total_taxes_detained
       TotaldeTraslados: total_taxes_transferred
-      ImpSaldoInsoluto: 
+      ImpSaldoInsoluto:
+    payroll:
+       Version: version
+       TipoNomina: type
+       FechaInicialPago: start_date
+       FechaFinalPago: end_date
+       NumDiasPagados: paid_days
+       TotalPercepciones: total_perceptions
+       TotalDeducciones: total_deductions
+       TotalOtrosPagos: total_other_payments
+       Emisor: issuer
+       Receptor: receiver
+       Percepciones: perceptions
+       Deducciones: deductions
+       OtrosPagos: other_payments
+    Emisor:
+      RegistroPatronal: rfc
+    Receptor:
+      Curp: curp
+      NumSeguridadSocial: nss
+      FechaInicioRelLaboral:  start_working_at
+      Antigüedad: seniority
+      TipoContrato: contract_type
+      Sindicalizado: unionized
+      TipoJornada: workday_type
+      TipoRegimen: regimen_type
+      NumEmpleado: employee_number
+      Departamento: area
+      Puesto: position
+      RiesgoPuesto: position_risk
+      PeriodicidadPago: payday
+      CuentaBancaria: bank_account
+      SalarioBaseCotApor: base_salary
+      SalarioDiarioIntegrado: salary_per_day
+      ClaveEntFed: state_code
+    Percepciones:
+      TotalSueldos: total_salary
+      TotalExento: total_exempt
+      TotalGravado: total_taxable
+    Deducciones:
+      TotalOtrasDeducciones: total_other_deductions
+
+
 
 
 
