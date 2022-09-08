@@ -163,6 +163,7 @@ en:
     payroll:
        Version: version
        TipoNomina: type
+       FechaPago: paid_at
        FechaInicialPago: start_date
        FechaFinalPago: end_date
        NumDiasPagados: paid_days
@@ -195,12 +196,13 @@ en:
       SalarioDiarioIntegrado: salary_per_day
       ClaveEntFed: state_code
     Percepciones:
-      TotalSueldos: total_salary
+      TotalSueldos: total
       TotalExento: total_exempt
       TotalGravado: total_taxable
       items: items
     Deducciones:
-      TotalOtrasDeducciones: total_other_deductions
+      TotalOtrasDeducciones: total
+      TotalImpuestosRetenidos: total_taxes_withheld
       items: items
     OtrosPagos:
       items: items
