@@ -198,8 +198,23 @@ en:
       TotalSueldos: total_salary
       TotalExento: total_exempt
       TotalGravado: total_taxable
+      TipoPercepcion: type
+      Clave: key
+      Concepto: description
+      ImporteGravado: exempt_amount
+      ImporteExento: taxable_amount
     Deducciones:
       TotalOtrasDeducciones: total_other_deductions
+      TipoDeduccion: type
+      Clave: key
+      Concepto: description
+      Importe: amount
+    OtrosPagos:
+      TipoOtroPago: type
+      Clave: key
+      Concepto: description
+      Importe: amount
+
 
 
 
