@@ -215,12 +215,10 @@ en:
       Importe: amount
       ImporteGravado: exempt_amount
       ImporteExento: taxable_amount
-
-
-
-
-
-
+    global_info:
+      Periodicidad: periodicity
+      Meses: month
+      'Año': year
     # cfdi_related:
     #   TipoRelacion: relationship_type
     # related:
