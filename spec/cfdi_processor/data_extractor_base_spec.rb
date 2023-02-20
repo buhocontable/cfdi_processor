@@ -8,6 +8,7 @@ RSpec.describe CfdiProcessor::StampedExtractor do
   it { should respond_to(:receiver) }
   it { should respond_to(:concepts) }
   it { should respond_to(:taxes) }
+  it { should respond_to(:global_info) }
 
   describe '#xml' do
     it "is expected that return a kind of String" do
@@ -42,6 +43,19 @@ RSpec.describe CfdiProcessor::StampedExtractor do
 
     it "is expected that return @receipt translated" do
       expect(subject.receipt.include?('date_issued')).to be_truthy
+    end
+  end
+
+  context 'when it has global_info' do
+    subject{ CfdiProcessor::StampedExtractor.new(xml_with_global_info) }
+
+    describe '#extract_data_from_xml' do
+      it "contains global_info data" do
+        expect(subject.global_info).to be_present
+        expect(subject.global_info['periodicity']).to eql('04')
+        expect(subject.global_info['month']).to eql('02')
+        expect(subject.global_info['year']).to eql('2023')
+      end
     end
   end
 end 

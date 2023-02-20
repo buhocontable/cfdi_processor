@@ -1,6 +1,6 @@
 module CfdiProcessor
   class StampedExtractor < CfdiProcessor::DataExtractorBase
-    attr_accessor :receipt, :issuer, :receiver, :concepts, :taxes, :complement, :payments, :payroll, :local_taxes
+    attr_accessor :receipt, :issuer, :receiver, :concepts, :taxes, :complement, :payments, :payroll, :local_taxes, :global_info
 
     def extract_data_from_xml
       receipt_data_from_xml
@@ -12,6 +12,7 @@ module CfdiProcessor
       payment_data_from_xml
       payroll_data_from_xml
       local_taxes_data_from_xml
+      global_info_from_xml
 
       self
     end
@@ -31,6 +32,11 @@ module CfdiProcessor
     def receiver_data_from_xml
       @receiver = nokogiri_xml.at('Receptor').to_h
       @base_hash['receiver'] = @receiver
+    end
+
+    def global_info_from_xml
+      @global_info = nokogiri_xml.at('InformacionGlobal').to_h
+      @base_hash['global_info'] = @global_info
     end
 
     def concepts_data_from_xml
