@@ -8,4 +8,3 @@ rescue LoadError => e
 end
 
 I18n.load_path << File.expand_path('locale/en.yml', __dir__)
-I18n.locale = :en

@@ -11,8 +11,6 @@ module CfdiProcessor
       @xml = xml
       @nokogiri_xml = ::Nokogiri::XML(xml)
       @nokogiri_xml.remove_namespaces!
-      I18n.load_path << File.expand_path('locale/en.yml', __dir__)
-      I18n.locale = :en
 
       # => Hook methods:
       #
@@ -41,11 +39,13 @@ module CfdiProcessor
 
       translated = {}
       if object.is_a? Hash
-        object.each_key do |key|
-          val = object[key]
-          val = translate(key, val) if val.is_a?(Array) || val.is_a?(Hash)
-          translation = I18n.t("cfdi.#{translation_key}.#{key}")
-          translated.merge!(translation => val)
+        I18n.with_locale(:en) do
+          object.each_key do |key|
+            val = object[key]
+            val = translate(key, val) if val.is_a?(Array) || val.is_a?(Hash)
+            translation = I18n.t("cfdi.#{translation_key}.#{key}")
+            translated.merge!(translation => val)
+          end
         end
       end
       translated
