@@ -47,6 +47,7 @@ module CfdiProcessor
         concepts = e.to_h
         concepts['Traslados']   = e.at('Impuestos').css('Traslado').map(&:to_h) if e.at('Impuestos')
         concepts['Retenciones'] = e.at('Impuestos').css('Retencion').map(&:to_h) if e.at('Impuestos')
+        concepts['IntitucionesEducativas'] = e.at('instEducativas').to_h if e.at('instEducativas')
         concepts
       end
       @base_hash['concepts'] = @concepts

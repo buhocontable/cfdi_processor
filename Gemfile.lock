@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cfdi_processor (1.1.1)
+    cfdi_processor (1.2.1)
 
 GEM
   remote: https://rubygems.org/
@@ -80,4 +80,4 @@ DEPENDENCIES
   shoulda-matchers (~> 4.3)
 
 BUNDLED WITH
-   2.2.4
+   2.2.34
