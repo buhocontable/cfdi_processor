@@ -75,6 +75,7 @@ en:
       descuento: discount
       traslados: transferred
       retenciones: detained
+      IntitucionesEducativas: educational_institutions
     taxes:
       TotalImpuestosTrasladados: total_taxes_transferred
       TotalImpuestosRetenidos: total_taxes_detained
@@ -91,6 +92,13 @@ en:
       tipoFactor: factor_type
       tasaOCuota: rate_or_fee
       importe: import
+    IntitucionesEducativas:
+      version: version
+      nombreAlumno: student_name
+      CURP: curp
+      nivelEducativo: educational_level
+      autRVOE: rvoe
+      rfcPago: rfc_payment
     Retenciones:
       Base: base
       Impuesto: tax
