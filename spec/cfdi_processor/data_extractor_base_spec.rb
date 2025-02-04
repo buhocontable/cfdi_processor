@@ -60,7 +60,7 @@ RSpec.describe CfdiProcessor::StampedExtractor do
   end
 
   context 'when it has totals attrs in taxes data' do
-    subject { CfdiProcessor::StampedExtractor.new(xml_with_taxes) }
+    subject { CfdiProcessor::StampedExtractor.new(xml_with_global_info) }
 
     describe '#extract_data_from_xml' do
       it 'contains taxes data' do
