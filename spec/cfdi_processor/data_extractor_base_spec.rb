@@ -59,6 +59,17 @@ RSpec.describe CfdiProcessor::StampedExtractor do
     end
   end
 
+  context 'when it has totals attrs in taxes data' do
+    subject { CfdiProcessor::StampedExtractor.new(xml_with_taxes) }
+
+    describe '#extract_data_from_xml' do
+      it 'contains taxes data' do
+        expect(subject.taxes['total_taxes_transferred']).to be_present
+        expect(subject.taxes['total_taxes_detained']).to be_present
+      end
+    end
+  end
+
   context 'when it has educational institution data' do
     subject { CfdiProcessor::StampedExtractor.new(xml_with_educational_institution) }
 
