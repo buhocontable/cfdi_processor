@@ -2,7 +2,7 @@
 
 module CfdiProcessor
   class StampedExtractor < CfdiProcessor::DataExtractorBase
-    attr_accessor :receipt, :issuer, :receiver, :concepts, :taxes, :complement, :payments, :payroll, :local_taxes,
+    attr_accessor :receipt, :issuer, :receiver, :concepts, :taxes, :complement, :payments, :payments_totals, :payroll, :local_taxes,
                   :global_info, :carta_porte, :combustibles
 
     def extract_data_from_xml
@@ -74,7 +74,16 @@ module CfdiProcessor
     def payment_data_from_xml
       return [] if nokogiri_xml.css('Pago').blank?
 
-      @payments = @nokogiri_xml.at('Pagos').css('Pago').map do |e|
+      pagos_node = @nokogiri_xml.at('Pagos')
+
+      # Extract Totales node (Pagos 2.0 feature)
+      totales_node = pagos_node.at('Totales')
+      if totales_node
+        @payments_totals = totales_node.to_h
+        @base_hash['payments_totals'] = @payments_totals
+      end
+
+      @payments = pagos_node.css('Pago').map do |e|
         payments = e.to_h
         payments['DoctoRelacionado'] = e.css('DoctoRelacionado').map do |doc|
           doc_hash = doc.to_h
