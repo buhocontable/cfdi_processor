@@ -4,7 +4,11 @@ Coveralls.wear!
 require "bundler/setup"
 require "cfdi_processor"
 require "shoulda-matchers"
-require "pry"
+begin
+  require "pry"
+rescue LoadError, NameError
+  # pry not available, skip it
+end
 require "support/xml_helper"
 
 RSpec.configure do |config|
