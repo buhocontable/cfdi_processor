@@ -3,7 +3,7 @@
 module CfdiProcessor
   class StampedExtractor < CfdiProcessor::DataExtractorBase
     attr_accessor :receipt, :issuer, :receiver, :concepts, :taxes, :complement, :payments, :payroll, :local_taxes,
-                  :global_info
+                  :global_info, :carta_porte, :combustibles
 
     def extract_data_from_xml
       receipt_data_from_xml
@@ -16,6 +16,8 @@ module CfdiProcessor
       payroll_data_from_xml
       local_taxes_data_from_xml
       global_info_from_xml
+      carta_porte_data_from_xml
+      combustibles_data_from_xml
 
       self
     end
@@ -121,6 +123,94 @@ module CfdiProcessor
         @local_taxes = nokogiri_xml.at('ImpuestosLocales').to_h
         @base_hash['local_taxes'] = @local_taxes
       end
+    end
+
+    # Carta Porte complement extraction (versions 2.0, 3.0, 3.1)
+    def carta_porte_data_from_xml
+      cp_node = nokogiri_xml.at('CartaPorte') ||
+                nokogiri_xml.at('CartaPorte20') ||
+                nokogiri_xml.at('CartaPorte30') ||
+                nokogiri_xml.at('CartaPorte31')
+      return unless cp_node
+
+      carta_porte_attrs = cp_node.to_h
+
+      # Ubicaciones (origin/destination)
+      carta_porte_attrs['Ubicaciones'] = cp_node.css('Ubicacion').map do |u|
+        ubicacion = u.to_h
+        ubicacion['Domicilio'] = u.at('Domicilio')&.to_h
+        ubicacion
+      end
+
+      # Mercancias (merchandise)
+      mercancias_node = cp_node.at('Mercancias')
+      if mercancias_node
+        carta_porte_attrs['Mercancias'] = mercancias_node.to_h
+        carta_porte_attrs['Mercancias']['items'] = mercancias_node.css('Mercancia').map(&:to_h)
+      end
+
+      # Autotransporte (truck transport)
+      auto_node = cp_node.at('Autotransporte')
+      if auto_node
+        carta_porte_attrs['Autotransporte'] = auto_node.to_h
+        carta_porte_attrs['Autotransporte']['IdentificacionVehicular'] = auto_node.at('IdentificacionVehicular')&.to_h
+        carta_porte_attrs['Autotransporte']['Seguros'] = auto_node.at('Seguros')&.to_h
+        carta_porte_attrs['Autotransporte']['Remolques'] = auto_node.css('Remolque').map(&:to_h)
+      end
+
+      # TransporteMaritimo
+      maritimo_node = cp_node.at('TransporteMaritimo')
+      carta_porte_attrs['TransporteMaritimo'] = maritimo_node.to_h if maritimo_node
+
+      # TransporteAereo
+      aereo_node = cp_node.at('TransporteAereo')
+      carta_porte_attrs['TransporteAereo'] = aereo_node.to_h if aereo_node
+
+      # TransporteFerroviario
+      ferro_node = cp_node.at('TransporteFerroviario')
+      if ferro_node
+        carta_porte_attrs['TransporteFerroviario'] = ferro_node.to_h
+        carta_porte_attrs['TransporteFerroviario']['DerechosDePaso'] = ferro_node.css('DerechosDePaso').map(&:to_h)
+        carta_porte_attrs['TransporteFerroviario']['Carros'] = ferro_node.css('Carro').map(&:to_h)
+      end
+
+      # FiguraTransporte (operators, owners)
+      figura_node = cp_node.at('FiguraTransporte')
+      if figura_node
+        carta_porte_attrs['FiguraTransporte'] = figura_node.css('TiposFigura').map(&:to_h)
+      end
+
+      @carta_porte = carta_porte_attrs
+      @base_hash['carta_porte'] = @carta_porte
+    end
+
+    # Combustibles complement extraction (Estado de Cuenta de Combustibles versions 1.1, 1.2)
+    def combustibles_data_from_xml
+      ecc_node = nokogiri_xml.at('EstadoDeCuentaCombustible') ||
+                 nokogiri_xml.at('ecc12:EstadoDeCuentaCombustible') ||
+                 nokogiri_xml.at('ecc11:EstadoDeCuentaCombustible')
+      return unless ecc_node
+
+      combustibles_attrs = ecc_node.to_h
+
+      # Conceptos
+      conceptos_node = ecc_node.at('Conceptos') || ecc_node
+      concepto_items = conceptos_node.css('ConceptoEstadoDeCuentaCombustible')
+      concepto_items = conceptos_node.css('Concepto') if concepto_items.empty?
+
+      combustibles_attrs['Conceptos'] = concepto_items.map do |c|
+        concepto = c.to_h
+        # Traslados within each concept
+        traslados_node = c.at('Traslados')
+        concepto['Traslados'] = traslados_node.css('Traslado').map(&:to_h) if traslados_node
+        # Determinados (v1.2)
+        determinados_node = c.at('Determinados')
+        concepto['Determinados'] = determinados_node.css('Determinado').map(&:to_h) if determinados_node
+        concepto
+      end
+
+      @combustibles = combustibles_attrs
+      @base_hash['combustibles'] = @combustibles
     end
   end
 end

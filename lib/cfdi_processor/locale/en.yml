@@ -227,6 +227,107 @@ en:
       Periodicidad: periodicity
       Meses: month
       'Año': year
+    # Carta Porte complement (versions 2.0, 3.0, 3.1)
+    carta_porte:
+      Version: version
+      TranspInternac: international_transport
+      EntradaSalidaMerc: entry_exit_merchandise
+      PaisOrigenDestino: origin_destination_country
+      ViaEntradaSalida: entry_exit_route
+      TotalDistRec: total_distance
+      Ubicaciones: locations
+      Mercancias: merchandise
+      Autotransporte: auto_transport
+      TransporteMaritimo: maritime_transport
+      TransporteAereo: air_transport
+      TransporteFerroviario: rail_transport
+      FiguraTransporte: transport_figures
+    Ubicaciones:
+      TipoUbicacion: location_type
+      IDUbicacion: location_id
+      RFCRemitenteDestinatario: sender_recipient_rfc
+      NombreRemitenteDestinatario: sender_recipient_name
+      FechaHoraSalidaLlegada: departure_arrival_datetime
+      DistanciaRecorrida: distance_traveled
+      Domicilio: address
+    Domicilio:
+      Calle: street
+      NumeroExterior: exterior_number
+      NumeroInterior: interior_number
+      Colonia: neighborhood
+      Localidad: locality
+      Referencia: reference
+      Municipio: municipality
+      Estado: state
+      Pais: country
+      CodigoPostal: zip_code
+    Mercancias:
+      PesoBrutoTotal: total_gross_weight
+      UnidadPeso: weight_unit
+      PesoNetoTotal: total_net_weight
+      NumTotalMercancias: total_merchandise_count
+      CargoPorTasacion: appraisal_charge
+      items: items
+    Mercancia:
+      BienesTransp: transported_goods
+      Descripcion: description
+      Cantidad: quantity
+      ClaveUnidad: unit_key
+      Unidad: unit
+      PesoEnKg: weight_kg
+      ValorMercancia: merchandise_value
+      Moneda: currency
+      FraccionArancelaria: tariff_fraction
+      UUIDComercioExt: foreign_trade_uuid
+    Autotransporte:
+      PermSCT: sct_permit
+      NumPermisoSCT: sct_permit_number
+      IdentificacionVehicular: vehicle_identification
+      Seguros: insurance
+      Remolques: trailers
+    IdentificacionVehicular:
+      ConfigVehicular: vehicle_config
+      PlacaVM: vehicle_plate
+      AnioModeloVM: vehicle_model_year
+    Seguros:
+      AseguraRespCivil: civil_liability_insurer
+      PolizaRespCivil: civil_liability_policy
+      AseguraMedAmbiente: environmental_insurer
+      PolizaMedAmbiente: environmental_policy
+      AseguraCarga: cargo_insurer
+      PolizaCarga: cargo_policy
+      PrimaSeguro: insurance_premium
+    Remolques:
+      SubTipoRem: trailer_subtype
+      Placa: plate
+    TiposFigura:
+      TipoFigura: figure_type
+      RFCFigura: figure_rfc
+      NumLicencia: license_number
+      NombreFigura: figure_name
+      NumRegIdTribFigura: figure_tax_reg_id
+      ResidenciaFiscalFigura: figure_fiscal_residence
+    # Combustibles complement (versions 1.1, 1.2)
+    combustibles:
+      Version: version
+      TipoOperacion: operation_type
+      NumeroDeCuenta: account_number
+      SubTotal: subtotal
+      Total: total
+      Conceptos: concepts
+    ConceptoEstadoDeCuentaCombustible:
+      Identificador: identifier
+      Fecha: date
+      Rfc: rfc
+      ClaveEstacion: station_key
+      Cantidad: quantity
+      TipoCombustible: fuel_type
+      NombreCombustible: fuel_name
+      FolioOperacion: operation_folio
+      ValorUnitario: unit_value
+      Importe: amount
+      Traslados: transfers
+      Determinados: determined
     # cfdi_related:
     #   TipoRelacion: relationship_type
     # related:
