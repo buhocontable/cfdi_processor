@@ -43,6 +43,51 @@ module XmlHelper
     '
   end
 
+  def xml_with_impuestos_in_addenda
+    <<~XML
+      <?xml version="1.0" encoding="utf-8"?>
+      <cfdi:Comprobante xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cfdi="http://www.sat.gob.mx/cfd/4" xmlns:OD="http://store.officedepot.com.mx/OnlineStore/CFD" xsi:schemaLocation="http://www.sat.gob.mx/cfd/4 http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd" Version="4.0" Serie="POSE" Folio="1" FormaPago="28" Moneda="MXN" TipoDeComprobante="I" Exportacion="01" MetodoPago="PUE" LugarExpedicion="52140" Fecha="2026-03-30T16:58:18" SubTotal="370.38" Total="401.00" NoCertificado="00001000000710772185" Certificado="MIIE" Sello="abc">
+        <cfdi:Emisor Rfc="ODM950324V2A" Nombre="OFFICE DEPOT DE MEXICO" RegimenFiscal="601"/>
+        <cfdi:Receptor Rfc="EKU9003173C9" Nombre="RECEPTOR TEST" DomicilioFiscalReceptor="50250" RegimenFiscalReceptor="612" UsoCFDI="G03"/>
+        <cfdi:Conceptos>
+          <cfdi:Concepto ClaveProdServ="44121707" ClaveUnidad="H87" Descripcion="IVA 16%" ObjetoImp="02" Cantidad="1" ValorUnitario="191.38" Importe="191.38">
+            <cfdi:Impuestos>
+              <cfdi:Traslados>
+                <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" Base="191.38" TasaOCuota="0.160000" Importe="30.62"/>
+              </cfdi:Traslados>
+            </cfdi:Impuestos>
+          </cfdi:Concepto>
+          <cfdi:Concepto ClaveProdServ="55101500" ClaveUnidad="H87" Descripcion="Exento" ObjetoImp="02" Cantidad="1" ValorUnitario="179.00" Importe="179.00">
+            <cfdi:Impuestos>
+              <cfdi:Traslados>
+                <cfdi:Traslado Impuesto="002" TipoFactor="Exento" Base="179.00"/>
+              </cfdi:Traslados>
+            </cfdi:Impuestos>
+          </cfdi:Concepto>
+        </cfdi:Conceptos>
+        <cfdi:Impuestos TotalImpuestosTrasladados="30.62">
+          <cfdi:Traslados>
+            <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" Base="191.38" TasaOCuota="0.160000" Importe="30.62"/>
+            <cfdi:Traslado Impuesto="002" TipoFactor="Exento" Base="179.00"/>
+          </cfdi:Traslados>
+        </cfdi:Impuestos>
+        <cfdi:Complemento>
+          <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" Version="1.1" UUID="852C0E8D-EA46-4554-98BE-107565D75137" FechaTimbrado="2026-03-30T18:58:18" RfcProvCertif="SST060807KU0" SelloCFD="abc" NoCertificadoSAT="00001000000711914678" SelloSAT="abc"/>
+        </cfdi:Complemento>
+        <cfdi:Addenda>
+          <OD:AddendaEmisor>
+            <OD:POS>
+              <OD:Impuestos>
+                <OD:Impuesto tipo="IVA 16%" subTotalPorTasa="191.38" total="30.62"/>
+                <OD:Impuesto tipo="EXENTO" subTotalPorTasa="179.00" total="0"/>
+              </OD:Impuestos>
+            </OD:POS>
+          </OD:AddendaEmisor>
+        </cfdi:Addenda>
+      </cfdi:Comprobante>
+    XML
+  end
+
   def xml_with_educational_institution
     '<?xml version="1.0" encoding="utf-8"?>
     <cfdi:Comprobante xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cfdi="http://www.sat.gob.mx/cfd/4" xmlns:iedu="http://www.sat.gob.mx/iedu" xsi:schemaLocation="http://www.sat.gob.mx/cfd/4 http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd http://www.sat.gob.mx/iedu http://www.sat.gob.mx/sitio_internet/cfd/iedu/iedu.xsd " Version="4.0" Folio="5562" Fecha="2024-09-11T10:51:15" MetodoPago="PUE" FormaPago="04" TipoDeComprobante="I" Moneda="MXN" TipoCambio="1" Exportacion="01" LugarExpedicion="53100" SubTotal="3219.00" Total="3219.00" Certificado="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" NoCertificado="00001000000510262161" Sello="hf53XfiMIjL8GiyFEMTkXRaqHRASMiiw04oJfcon8dHrVEK7n6CMOZHrxlz0IfYn8oMNBciWJfwF4Zhbzt/AQC9lgJmW3wxfghgXWwKhZGvEyQAL8JbL/YbSQmCe3zoy1jaoiv0F/rPjvuek/trGOdAivWkFwE/rNrhdAE/KYy71DC7u+HSk1e3IZ7Dnk/303TTVKvyNWN7Uer/lDddXY7ZsXt/F4pIVk5Te+ZmJPNNGMBVmSbyzc/bZZe0/L6ozWx2+Uvz6qGnE3ruBRGcbsWVJI4tXcK+HNJ/luNJYUKAv0RlNHiUL3nQoBdPMQ24WhUNME6SlFwdZC5TbiYaJSg==">
