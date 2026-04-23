@@ -56,10 +56,10 @@ module CfdiProcessor
     end
 
     def taxes_data_from_xml
-      return [] if nokogiri_xml.css('Comprobante > Impuestos').blank?
-
       base_node = nokogiri_xml.css('Comprobante > Impuestos').last
-      taxes = base_node&.to_h || {}
+      return [] unless base_node
+
+      taxes = base_node.to_h
       taxes['Traslados']   = base_node.css('Traslado').map(&:to_h)
       taxes['Retenciones'] = base_node.css('Retencion').map(&:to_h)
       @taxes = taxes
