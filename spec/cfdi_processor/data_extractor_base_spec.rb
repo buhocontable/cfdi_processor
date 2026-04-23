@@ -70,6 +70,22 @@ RSpec.describe CfdiProcessor::StampedExtractor do
     end
   end
 
+  context "when the Addenda contains an element named 'Impuestos' in a private namespace" do
+    subject { CfdiProcessor::StampedExtractor.new(xml_with_impuestos_in_addenda) }
+
+    it 'picks the top-level Impuestos, not the one inside the Addenda' do
+      expect(subject.taxes['total_taxes_transferred']).to eql('30.62')
+    end
+
+    it 'extracts the real top-level traslados, not Addenda children' do
+      transferred = subject.taxes['transferred']
+      expect(transferred.size).to eql(2)
+      rated = transferred.find { |t| t['rate_or_fee'] == '0.160000' }
+      expect(rated['import']).to eql('30.62')
+      expect(rated['base']).to eql('191.38')
+    end
+  end
+
   context 'when it has educational institution data' do
     subject { CfdiProcessor::StampedExtractor.new(xml_with_educational_institution) }
 
